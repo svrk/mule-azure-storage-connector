@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Asciidoctor 1.5.4">
+  <meta name="keywords" content="Azure, anypoint, connector">
+  <title>Anypoint Azure Storage Connector User Manual</title>
+  <link rel="stylesheet" href="https://asciidoclive.com/assets/asciidoctor.js/css/asciidoctor.css">
+</head>
+
+<body class="article">
+  <div id="header">
+    <h1>Anypoint Azure Storage Connector User Manual</h1>
+  </div>
+  <div id="content">
+    <div id="preamble">
+      <div class="sectionbody">
+        <div id="toc" class="toc">
+          <div id="toctitle" class="title">Table of Contents</div>
+          <ul class="sectlevel1">
+            <li><a href="#_introduction">Introduction</a></li>
+            <li><a href="#_prerequisites">Prerequisites</a>
+              <ul class="sectlevel2">
+                <li><a href="#requirements">Software Requirements</a></li>
+                <li><a href="#_compatibility">Compatibility</a></li>
+              </ul>
+            </li>
+            <li><a href="#_installing_the_connector">Installing the Connector</a>
+              <ul class="sectlevel2">
+                <li><a href="#_upgrading_from_an_older_version">Upgrading from an Older Version</a></li>
+              </ul>
+            </li>
+            <li><a href="#_configuring_the_connector_global_element">Configuring the Connector Global Element</a></li>
+            <li><a href="#_connector_configuration_strategies">Connector Configuration Strategies</a></li>
+            <li><a href="#_using_the_connector">Using the Connector</a>
+              <ul class="sectlevel2">
+                <li><a href="#_connector_namespace_and_schema">Connector Namespace and Schema</a></li>
+                <li><a href="#_using_the_connector_in_a_mavenized_mule_app">Using the Connector in a Mavenized Mule App</a></li>
+              </ul>
+            </li>
+            <li><a href="#_demo_mule_applications_using_connector">Demo Mule Applications Using Connector</a>
+              <ul class="sectlevel2">
+                <li><a href="#_example_use_case">Example Use Case</a></li>
+                <li><a href="#_example_use_case_xml">Example Use Case - XML</a></li>
+              </ul>
+            </li>
+            <li><a href="#_resources">Resources</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="sect1">
+      <h2 id="_introduction">Introduction</h2>
+      <div class="sectionbody">
+        <div class="paragraph">
+          <p>Azure Storage connector allows user to make use of Azure Storage services
+            using Microsoft Azure Storage SDK for Java.</p>
+        </div>
+        <div class="paragraph">
+          <p>Microsoft&#8217;s Azure Storage is the cloud storage solution for modern
+            applications that rely on durability, availability and scalability to
+            meet the needs of their customers.</p>
+        </div>
+        <div class="paragraph">
+          <p>Read through this user guide to understand how to set up and configure
+            a basic flow using the connector. Track feature additions, compatibility,
+            limitations and API version updates with each release of the connector
+            using the <a href="release-notes.html">Connector Release Notes</a>. Review
+            the connector operations and functionality using the <a href="/azure-storage-connector/apidocs/2.0.0/index.html">Technical Reference</a>            alongside the <a href="/azure-storage-connector/demo/mule-azure-connector-demo.zip">demo application</a>.</p>
+        </div>
+        <div class="paragraph">
+          <p>MuleSoft maintains this connector under the <a href="https://www.mulesoft.com/exchange#!/?filters=Enterprise%20I">Enterprise IT</a>            support policy.</p>
+        </div>
+      </div>
+    </div>
+    <div class="sect1">
+      <h2 id="_prerequisites">Prerequisites</h2>
+      <div class="sectionbody">
+        <div class="paragraph">
+          <p>This document assumes that you are familiar with Mule,
+            <a href="https://www.mulesoft.com/exchange#!/?types=connector">Anypoint Connectors</a>,
+            and
+            <a href="https://docs.mulesoft.com/anypoint-studio/v/7.1/">Anypoint Studio Essentials</a>.
+            To increase your familiarity with Studio, consider completing a <a href="https://docs.mulesoft.com/anypoint-studio/v/7.1/add-modules-in-studio-to">Anypoint Studio Tutorial</a>.
+            This page requires some basic knowledge of <a href="https://docs.mulesoft.com/mule-user-guide/v/4.1/mule-concepts">Mule Concepts</a>,
+            <a href="https://docs.mulesoft.com/mule-user-guide/v/4.1/elements-in-a-mule-flow">Elements in a Mule Flow</a>,
+            and <a href="https://docs.mulesoft.com/mule-user-guide/v/4.1/global-elements">Global Elements</a>.</p>
+        </div>
+        <div class="sect2">
+          <h3 id="requirements">Software Requirements</h3>
+          <div class="olist arabic">
+            <ol class="arabic">
+              <li>
+                <p>Anypoint Studio 7.1.x with Mule Runtime 4.1.x</p>
+              </li>
+              <li>
+                <p>Azure Storage Connector v2.1.0</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+        <div class="sect2">
+          <h3 id="_compatibility">Compatibility</h3>
+          <div class="paragraph">
+            <p>Azure Storage connector supports Mule 4.1.x version.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sect1">
+      <h2 id="_installing_the_connector">Installing the Connector</h2>
+      <div class="sectionbody">
+        <div class="paragraph">
+          <p>You can install the connector in Anypoint Studio using the instructions
+            in
+            <a href="https://docs.mulesoft.com/exchange/#installing-a-connector-from-anypoint-exchange">Installing a Connector from Anypoint Exchange</a>.</p>
+        </div>
+        <div class="paragraph">
+          <p>Installation guide is also available <a href="install-guide.html">here</a></p>
+        </div>
+        <div class="sect2">
+          <h3 id="_upgrading_from_an_older_version">Upgrading from an Older Version</h3>
+          <div class="paragraph">
+            <p>This is the next version of Azure Storage Connector for Mule 4, upgraded
+              from the earlier released version v2.1.0 and is compatible with
+              Studio 7,  Mule 4.x. and Java 17</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sect1">
+      <h2 id="_configuring_the_connector_global_element">Configuring the Connector Global Element</h2>
+      <div class="sectionbody">
+        <div class="paragraph">
+          <p>To use the Anypoint Azure Storage connector in your Mule application, you
+            must configure a global element that can be used by the Anypoint Azure
+            Storage connector (read more about <a href="https://docs.mulesoft.com/mule-user-guide/v/3.8/global-elements">Global Elements</a>).
+            The Azure Storage connector offers the following global configuration(s),
+            requiring the following credentials: Storage Account Name and Account
+            Key or SAS Token.</p>
+        </div>
+        <table class="tableblock frame-all grid-all spread">
+          <colgroup>
+            <col style="width: 50%;">
+            <col style="width: 50%;">
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="tableblock halign-left valign-top">Field</th>
+              <th class="tableblock halign-left valign-top">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <div>
+                  <div class="paragraph">
+                    <p><strong>Access Key</strong></p>
+                  </div>
+                </div>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <div>
+                  <div class="paragraph">
+                    <p>Enter the Access Key to log into Azure Storage account.</p>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <div>
+                  <div class="paragraph">
+                    <p><strong>Storage account name</strong></p>
+                  </div>
+                </div>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <div>
+                  <div class="paragraph">
+                    <p>Enter the Storage Account Name.</p>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <div>
+                  <div class="paragraph">
+                    <p><strong>Shared Access Signature</strong></p>
+                  </div>
+                </div>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <div>
+                  <div class="paragraph">
+                    <p>Login to the Azure Storage account to geerate the SAS token.</p>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="sect1">
+      <h2 id="_connector_configuration_strategies">Connector Configuration Strategies</h2>
+      <div class="sectionbody">
+        <div class="paragraph">
+          <p>There are two different strategies to connect to Azure Storage Account.
+            First one is using Access Key and the other one is using Shared Access
+            Signature. User needs to login to Storage account to get any one of these
+            two for making connection.</p>
+        </div>
+      </div>
+    </div>
+    <div class="sect1">
+      <h2 id="_using_the_connector">Using the Connector</h2>
+      <div class="sectionbody">
+        <div class="paragraph">
+          <p>The below list of operations can be performed by using Azure Storage Connector.</p>
+        </div>
+        <table class="tableblock frame-all grid-all spread">
+          <colgroup>
+            <col style="width: 25%;">
+            <col style="width: 25%;">
+            <col style="width: 25%;">
+            <col style="width: 25%;">
+          </colgroup>
+          <tbody>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Operation</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Description</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Inbound</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Outbound</strong></p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Download Blob</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Downloads the Blob from the container.</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">container, File Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Inputstream of Blob.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>List All Containers</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Gets list of all containers.</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">No input required.</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">List of all Blob containers.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Create Container</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Creates a Blob container.</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Container Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful creation, False for failure.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>List Blobs In Container</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Gets the list of Blobs in a container</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Container Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">List of Blob items.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Upload Blob</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Uploads the Blob into the storage.</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Container, File Name, File inputstream</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful upload, False for failure.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Upload Blob From Path</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Uploads the Blob into the storage from a file path.</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Container, File Name, File path</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful upload, False for failure.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Delete Blob</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Deletes the Blob in the storage account</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Container, File Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful deletion, False for failure.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Delete Container</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Deletes container from the storage account.</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Container Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful deletion, False for failure.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Create Queue</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Creates Queue in the storage account</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Queue Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful creation, False for failure.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Add Message To Queue</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Uploads message to the Queue.</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Queue Name, Message</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful upload, False for failure.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Peek Message From Queue</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Peek at the message in the front of a queue without removing it from
+                  the queue.</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Queue Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Message.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Update Message</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Updates the contents of a queued message</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Queue Name, Old message, New message</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful update, False for failure.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Get Queue Length</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Gets the length of the Queue.</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Queue Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Length of Queue.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Dequeue Message</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Retrieves single message from the Queue.</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Queue Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Message</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Dequeue Messages</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Gets list of messages from the Queue</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Queue Name, Number Of Messages</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">List of Messages.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Get List Of Queues</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Gets list of Queues in the storage account</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">No input required</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">List of Queues.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Delete Queue</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Deletes the Queue</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Queue Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful deletion, False for failure.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Create Table</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Creates a Table in the storage account</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Table Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful creation, False for failure.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>List Table</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Gets list of Tables in the storage account</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">No input required</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">List of Tables.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Add Entity</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Adds entity to the table</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Table Name, Partition Key,Row Key, properties</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Table Result.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Get Single Entity</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Retrieves single entity of the table</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Table Name, Partition key, Row key</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Table Entity</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Update Entity</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Updates entity in the given table</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Table Name,Partition Key,RowKey, properties</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Table Result</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Delete Entity</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Deletes the entity from the table</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Table Name, Partition Key, Row Key</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful deletion, False for failure.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Delete Table</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Deletes the table from the storage account</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Table Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful deletion, False for failure.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Create Share</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Creates Share in the storage account</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Share Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful creation, False for failure.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Get Share</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Gets Share details</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Share Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">File Share</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Upload File In Directory</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Uploads file in directory</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">File Path, Share Name, Directory Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful updload, False for failure.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Upload File In Root Directory</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Uploads file in root directory</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">File Path, Share Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful upload, False for failure.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Upload File In Directory With Stream</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">ploads a file input stream to the specified directory of a share</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">File Stream, File Name, Share Name, Directory Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful upload, False for failure.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Upload File In Root Directory With Stream</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Uploads a file input stream to the specified directory of a share</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">File Stream, File Name, Share Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful upload, False for failure.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Create Directory</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Create directory in the Share</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Directory Name, Share Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful creation, False for failure.</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Lst Files and Dir in Share</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Gets the list of Files and Directories</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Share Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">List of File items</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>List Files and Dir In Directory</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Gets the list of Files and Directories</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Share Name, Directory Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">List of File items</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Download File</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Downloads the file from the directory</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">File Name, Directory Name, Share Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">File inputstream</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Download File From Root Dir</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Downloads the file from root directory</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">File Name, Share Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">File text</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Delete File</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Deletes file from the directory</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">File Name, Directory Name, Share Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful deletion, False for failure</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Delete Directory</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Deletes the directory from the Share</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Directory Name, Share Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful deletion, False for failure</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Delete Share</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Deletes the Share from the storage account</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Share Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful deletion, False for failure</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Insert or Replace Entity</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Insert or Merge to the storage account</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Table Entity</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful replace, False for failure</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Insert or Merge Entity</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Insert or Merge to the storage account</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Table Entity</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful merge, False for failure</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Batch Insert or Replace Entities</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Batch Insert or Replace to the storage account</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">List of table entities</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful replace, False for failure</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Batch Insert or Merge Entities</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Batch Insert or Merge to the storage account</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">List of table entities</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for successful Merge, False for failure</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Is Blob Exists</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Check the Blob existence from the storage account</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Blob Name and Container</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">True for existing or False</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Download Blob Using RegEx</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Downloads the Blob from the storage account</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Part of Blob Name</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">File Stream</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock"><strong>Get All Entities</strong></p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Gets all the Entities from the storage account</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">Entity Definition</p>
+              </td>
+              <td class="tableblock halign-left valign-top">
+                <p class="tableblock">List of Table entities</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="sect2">
+          <h3 id="_connector_namespace_and_schema">Connector Namespace and Schema</h3>
+          <div class="paragraph">
+            <p>When designing your application in Studio, the act of dragging the connector
+              from the palette onto the Anypoint Studio canvas should automatically
+              populate the XML code with the connector <strong>namespace</strong>              and <strong>schema location</strong>.</p>
+          </div>
+          <div class="paragraph">
+            <p><strong>Namespace:</strong> <code><a href="http://www.mulesoft.org/schema/mule/azure-storage-service" class="bare">http://www.mulesoft.org/schema/mule/azure-storage-service</a></code>
+              <strong>Schema Location:</strong> <code><a href="http://www.mulesoft.org/schema/mule/azure-storage-service/current/mule-azure-storage-service.xsd" class="bare">http://www.mulesoft.org/schema/mule/azure-storage-service/current/mule-azure-storage-service.xsd</a></code></p>
+          </div>
+          <div class="admonitionblock tip">
+            <table>
+              <tr>
+                <td class="icon">
+                  <div class="title">Tip</div>
+                </td>
+                <td class="content">
+                  If you are manually coding the Mule application in Studio&#8217;s XML editor or other
+                  text editor, define the namespace and schema location in the header
+                  of your <strong>Configuration XML</strong>, inside
+                  the <code>&lt;mule&gt;</code> tag.
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="listingblock">
+            <div class="content">
+              <pre class="highlight"><code class="language-xml" data-lang="xml">http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/azure-storage-service http://www.mulesoft.org/schema/mule/azure-storage-service/current/mule-azure-storage-service.xsd
+
+      &lt;!-- put your global configuration elements and flows here --&gt;
+
+&lt;/mule&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="sect2">
+          <h3 id="_using_the_connector_in_a_mavenized_mule_app">Using the Connector in a Mavenized Mule App</h3>
+          <div class="paragraph">
+            <p>If you are coding a Mavenized Mule application, this XML snippet must
+              be included in your <code>pom.xml</code> file.</p>
+          </div>
+          <div class="listingblock">
+            <div class="content">
+              <pre class="highlight"><code class="language-xml" data-lang="xml">    	&lt;dependency&gt;
+            &lt;groupId&gt;org.mule.modules&lt;/groupId&gt;
+    		&lt;artifactId&gt;azure-storage-connector&lt;/artifactId&gt;
+    		&lt;version&gt;3.0.0&lt;/version&gt;
+    		&lt;classifier&gt;mule-plugin&lt;/classifier&gt;
+        &lt;/dependency&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sect1">
+      <h2 id="_demo_mule_applications_using_connector">Demo Mule Applications Using Connector</h2>
+      <div class="sectionbody">
+        <div class="paragraph">
+          <p>You can download fully functional demo applications using the Azure Storage
+            connector from <a href="azure-storage-connector-demo.zip">this link</a></p>
+        </div>
+        <div class="sect2">
+          <h3 id="_example_use_case">Example Use Case</h3>
+          <div class="paragraph">
+            <p>The current use case describes how to create a Mule application to upload
+              Blob into Azure Storage account.</p>
+          </div>
+          <div class="ulist">
+            <ul>
+              <li>
+                <p>Create a new Mule Project in Anypoint Studio.</p>
+              </li>
+              <li>
+                <p>Set Azure Storage account credentials in src/main/mule/mule-app.properties.</p>
+              </li>
+              <li>
+                <p>Copy the api.raml file in src/main/resources/api folder, which is
+                  available in the azure-storage-demo application.</p>
+              </li>
+              <li>
+                <p>Generate Flows from REST Api.</p>
+              </li>
+              <li>
+                <p>Drag and drop the Azure storage connector from Mule palette.</p>
+              </li>
+              <li>
+                <p>Click Test Connection to confirm that Mule can connect with the instance.
+                  If the connection is successful, click OK to save the configuration.
+                  Otherwise, review or correct any invalid parameters and test again.</p>
+              </li>
+              <li>
+                <p>Paste the below XML in the generated Mule Flow.</p>
+              </li>
+              <li>
+                <p>Deploy the application and check "DEPLOYED" on the console.</p>
+              </li>
+              <li>
+                <p>Browse the URL: <a href="http://localhost:8081/console" class="bare">http://localhost:8081/console</a></p>
+              </li>
+              <li>
+                <p>Click the Upload button and enter the input values.</p>
+              </li>
+              <li>
+                <p>Submit the values and verify the results.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect2">
+          <h3 id="_example_use_case_xml">Example Use Case - XML</h3>
+          <div class="paragraph">
+            <p>Paste this into Anypoint Studio to interact with the example use case
+              application discussed in this guide.</p>
+          </div>
+          <div class="listingblock">
+            <div class="content">
+              <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:azure-storage="http://www.mulesoft.org/schema/mule/azure-storage"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/azure-storage http://www.mulesoft.org/schema/mule/azure-storage/current/mule-azure-storage.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd"&gt;
+
+	&lt;configuration-properties file="mule-app.properties" doc:name="Configuration properties"/&gt;
+
+	&lt;azure-storage:config name="access-key-azure-connection-key" doc:name="Azure Storage Config" doc:id="9cf50bdb-2bf7-4739-a06e-aff22e2b7c09" &gt;
+		&lt;azure-storage:access-key-config-connection accountName="${account.name}" accountKey="${account.key}" /&gt;
+	&lt;/azure-storage:config&gt;
+
+	&lt;http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="e54d52e2-de53-4ec8-915a-f5386274170a" &gt;
+		&lt;http:listener-connection host="0.0.0.0" port="${http.port}" /&gt;
+	&lt;/http:listener-config&gt;
+
+	&lt;azure-storage:config name="Azure_Storage_Config_Sas" doc:name="Azure Storage Config" doc:id="6c7e2b65-8001-4726-8ba8-8a903729faf2" &gt;
+		&lt;azure-storage:sas-token-config-connection accountName="${account.name}" sasToken="${sas.token}" /&gt;
+	&lt;/azure-storage:config&gt;
+
+	&lt;flow name="UploadBlobFromPathFlow" doc:id="ec672dfb-1046-4542-957a-6a87e5112d34" &gt;
+		&lt;http:listener doc:name="Listener" doc:id="c3e65d01-e453-4691-a7f3-1a89246c59a6" config-ref="HTTP_Listener_config" path="/blob-test" allowedMethods="POST"/&gt;
+		&lt;azure-storage:create-container doc:name="Create container" doc:id="83b0dc5c-7125-47de-9362-643e357e04fd" config-ref="Azure_Storage_Config_Access-key" containerName="wwazuredemo"/&gt;
+
+		&lt;azure-storage:delete-container config-ref="Azure_Storage_Config_Access-key" containerName="wwazuredemo"/&gt;
+		&lt;ee:transform doc:name="Transform Message" doc:id="1b83fc06-b95a-4ccb-910e-2e261619fde5" &gt;
+			&lt;ee:message &gt;
+				&lt;ee:set-payload &gt;&lt;![CDATA[%dw 2.0
+output application/json
+---
+payload]]&gt;&lt;/ee:set-payload&gt;
+			&lt;/ee:message&gt;
+		&lt;/ee:transform&gt;
+		&lt;logger level="INFO" doc:name="Logger" doc:id="66f61425-05d6-46ea-85c1-4c925ac3e995" message="#[payload]"/&gt;
+	&lt;/flow&gt;
+
+	&lt;flow name="ListAllContainersFlow" doc:id="b10028e8-3bdc-4774-bccc-c79ede654f4b" &gt;
+		&lt;http:listener doc:name="Listener" config-ref="HTTP_Listener_config" path="/list-all"/&gt;
+		&lt;azure-storage:list-all-containers doc:name="List all containers" doc:id="28d527a7-4334-4d7d-ab22-e60b2c23dc22" config-ref="Azure_Storage_Config_Access-key"/&gt;
+		&lt;ee:transform doc:name="Transform Message" doc:id="afc08479-c7a1-4b43-95bc-4bc0c2212017" &gt;
+			&lt;ee:message &gt;
+				&lt;ee:set-payload &gt;&lt;![CDATA[%dw 2.0
+output application/json
+---
+{
+	containers: {
+		name: payload.name
+	}
+}]]&gt;&lt;/ee:set-payload&gt;
+			&lt;/ee:message&gt;
+		&lt;/ee:transform&gt;
+		&lt;logger level="INFO" doc:name="Logger" doc:id="66f61425-05d6-46ea-85c1-4c925ac3e995" message="#[payload]"/&gt;
+	&lt;/flow&gt;
+
+	&lt;flow name="UploadBlobFlow" doc:id="67ddf897-9d50-4a66-b378-8d318c62e994" &gt;
+		&lt;http:listener doc:name="Listener" config-ref="HTTP_Listener_config" path="/azure-test"/&gt;
+		&lt;set-payload value="First Test for Azure" doc:name="Set Payload" doc:id="7dc2743a-4a0d-4d9f-95ef-ba781c9397dc" /&gt;
+		&lt;azure-storage:upload-blob doc:name="Upload blob" doc:id="5b39b0ae-2930-47f8-8d6a-b1909726891c" config-ref="Azure_Storage_Config_Access-key"&gt;
+			&lt;azure-storage:storblob container="wwazurestorage" fileName="test2" fileStream="#[payload]" /&gt;
+		&lt;/azure-storage:upload-blob&gt;
+		&lt;ee:transform doc:name="Transform Message" doc:id="0689dab4-f2c4-4c49-9bee-0119248002a1" &gt;
+			&lt;ee:message &gt;
+				&lt;ee:set-payload &gt;&lt;![CDATA[%dw 2.0
+output application/json
+---
+payload]]&gt;&lt;/ee:set-payload&gt;
+			&lt;/ee:message&gt;
+		&lt;/ee:transform&gt;
+		&lt;logger level="INFO" doc:name="Logger" doc:id="d3de7914-4bd1-4f82-8c13-1150def8eb5f" message="#[payload]"/&gt;
+	&lt;/flow&gt;
+
+	&lt;flow name="DeleteBlobFlow" doc:id="373b6d34-f113-471a-a34b-362f43fec90f" &gt;
+		&lt;http:listener doc:name="Listener" doc:id="c957e872-e6ee-42bd-8624-31806bf4c99f" config-ref="HTTP_Listener_config" path="/deleteblob"/&gt;
+		&lt;azure-storage:delete-blob doc:name="Delete blob" doc:id="1ba60db0-7fcc-44f1-a05a-ca4775982523" config-ref="Azure_Storage_Config_Access-key"&gt;
+			&lt;azure-storage:blob container="wwazurestorage" fileName="test2" /&gt;
+		&lt;/azure-storage:delete-blob&gt;
+		&lt;ee:transform doc:name="Transform Message" doc:id="09b4b44e-382d-45c8-98e7-11e6808ed16b" &gt;
+			&lt;ee:message &gt;
+				&lt;ee:set-payload &gt;&lt;![CDATA[%dw 2.0
+output application/json
+---
+{
+	status: payload
+}]]&gt;&lt;/ee:set-payload&gt;
+			&lt;/ee:message&gt;
+		&lt;/ee:transform&gt;
+		&lt;logger level="INFO" doc:name="Logger" doc:id="4066bc49-6e19-4dd1-a70d-97cace8aa5df" message="#['Blob deleted']"/&gt;
+	&lt;/flow&gt;
+
+	&lt;flow name="downloadBlobFlow" doc:id="9cf33c8c-17c6-45bc-9095-8daa6f8144ff" &gt;
+		&lt;http:listener doc:name="Listener" doc:id="e3b817f5-ef3a-4ee4-8004-d7fd8a97bf77" config-ref="HTTP_Listener_config" path="/download-blob"/&gt;
+		&lt;azure-storage:download-blob doc:name="Download blob" doc:id="109fd93b-718e-46c8-be60-ea04571afbcd" config-ref="Azure_Storage_Config_Access-key"&gt;
+			&lt;azure-storage:blob container="wwazurestorage" fileName="test2" /&gt;
+		&lt;/azure-storage:download-blob&gt;
+		&lt;logger level="INFO" doc:name="Logger" doc:id="373d53ba-80c2-41d8-9a6b-b2642c216cb5" message="#[payload]"/&gt;
+	&lt;/flow&gt;
+
+	&lt;flow name="isBlobExistsFlow" doc:id="6e3fa1cd-4273-4d5d-a1ea-c44d051cb915" &gt;
+		&lt;http:listener doc:name="Listener" doc:id="e12435f8-0447-41b7-8e2a-87cf73c05385" config-ref="HTTP_Listener_config" path="/isblobexists"/&gt;
+		&lt;azure-storage:is-blob-exists doc:name="Is blob exists" doc:id="831413a6-c056-46a1-aaa4-5deb4b4969e2" config-ref="Azure_Storage_Config_Access-key" containerName="wwazurestorage" blobName="#['test']"/&gt;
+		&lt;ee:transform doc:name="Transform Message" doc:id="e8071616-50ba-4827-8efd-26a1ee2c0374" &gt;
+			&lt;ee:message &gt;
+				&lt;ee:set-payload &gt;&lt;![CDATA[%dw 2.0
+output application/json
+---
+{
+	status: payload
+}]]&gt;&lt;/ee:set-payload&gt;
+			&lt;/ee:message&gt;
+		&lt;/ee:transform&gt;
+		&lt;logger level="INFO" doc:name="Logger" doc:id="39f6029b-7a07-4339-b50d-fa9b28f26c8f" message="#[payload]"/&gt;
+	&lt;/flow&gt;
+
+
+&lt;/mule&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sect1">
+      <h2 id="_resources">Resources</h2>
+      <div class="sectionbody">
+        <div class="ulist">
+          <ul>
+            <li>
+              <p>Access the <a href="release-notes.html">Azure Storage Connector Release Notes</a>.</p>
+            </li>
+            <li>
+              <p>Access the <a href="http://azure.github.io/azure-storage-java/">Azure Storage API reference</a></p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<h2 id="installing-anypoint-azure-storage-connector">Installing Anypoint Azure Storage Connector</h2>
+<p>The following instructions were written for Anypoint Studio on Windows OS. Instructions may vary for other operating systems.<br/><br/>
+1. Launch Anypoint Studio and click on Help -> Install New Software.<br/>
+<img src="https://cloud.githubusercontent.com/assets/22465732/19963902/b729a696-a1e4-11e6-9c3d-66366e2ab1bb.PNG" alt="i1" /> <br/><br/>
+2. Select Anypoint Connectors Update Site - http://repository.mulesoft.org/connectors/releases/3.5.0 from the drop-down menu next to the Work with field. If you don't see the update site, click Add to add it manually. <br/>
+<img src="https://cloud.githubusercontent.com/assets/22465732/19963907/c14968e6-a1e4-11e6-97dc-4912eeee25ae.PNG" alt="i2" /> <br/><br/>
+3. Expand Select and select Azure Storage Connector. Press Next &gt; to review the items to be installed. <br/>
+<img src="https://cloud.githubusercontent.com/assets/20812353/23496426/32828f8a-ff44-11e6-8585-1a8d266ecf87.png" alt="i3" /> <br/><br/>
+4. Press Next &gt; again to review and accept the license. Press Finish to install the connector.<br/>
+<img src="https://cloud.githubusercontent.com/assets/20812353/23496466/62f804ba-ff44-11e6-91f7-cee8788e4b43.png" alt="i4" /> <img src="https://cloud.githubusercontent.com/assets/22465732/19963924/d8e4491c-a1e4-11e6-822f-6ad3e60658f5.PNG" alt="i5" /> <br/><br/>
+5. Press OK to accept the prompted security dialog box and allow Anypoint Studio to restart. <br/>
+<img src="https://cloud.githubusercontent.com/assets/22465732/19963944/e734683a-a1e4-11e6-8b93-0402ccf492c2.PNG" alt="i6" /> <br/>
+<br/>
+Example Use Case - Create Project using Azure Storage Connector over HTTP The following example requires basic familiarity with Azure Storage, Anypoint Studio and Mule ESB.</p>
+<h4 id="step-1">Step 1</h4>
+<p> Create a new Mule Project with Mule Server 3.8.0 EE as runtime:</p>
+<div class="figure">
+<img src="https://cloud.githubusercontent.com/assets/20812353/23496532/b55e7ef0-ff44-11e6-9f56-e89fd55295ed.png" alt="i7" />
+</div>
+<h4 id="step-2">Step 2</h4>
+<p> Locate the Azure Storage Connector on the right hand-side palette:</p>
+<div class="figure">
+<img src="https://cloud.githubusercontent.com/assets/20812353/23496548/c8cd4b38-ff44-11e6-9b40-0d59d632f112.png" alt="i8" />
+</div>
+<h4 id="step-3">Step 3</h4>
+<p> Drag the HTTP connector and Azure Storage Connector over to the canvas:</p>
+<div class="figure">
+<img src="https://cloud.githubusercontent.com/assets/20812353/23496569/ebc3eaca-ff44-11e6-8871-969c61f2db7b.png" alt="i9" />
+</div>
+<p> Configure Azure Storage Connector by entering account name and Key</p>
+<div class="figure">
+<img src="https://cloud.githubusercontent.com/assets/20812353/23496596/06742b46-ff45-11e6-83bc-0ae4fc299fa0.png" alt="i10" />
+</div>
+<p> Enter Container Name, Blob Path, File Name.</p>
+<div class="figure">
+<img src="https://cloud.githubusercontent.com/assets/20812353/23496623/2a6dc296-ff45-11e6-8a4c-2a474f160c68.png" alt="i11" />
+</div>
+<p> Run the Mule Application and browse the URL to Upload the Blob.</p>
+<p><img src="https://cloud.githubusercontent.com/assets/20812353/23496650/4b6cec2e-ff45-11e6-9f0f-eaa3d2686c42.png" alt="i12" /> <br/> End</p>
